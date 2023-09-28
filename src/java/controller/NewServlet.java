@@ -1,6 +1,6 @@
 package controller;
 
-import model.*;
+import model.RegisterDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.LoginDB;
 
 /**
  * Servlet to handle form submissions.
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 public class NewServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException, ParseException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
              
@@ -28,13 +29,10 @@ public class NewServlet extends HttpServlet {
             String dob = request.getParameter("dob");
             String gender = request.getParameter("gender");
             int gen = 0;
-            if(gender.equals("male")) {
-                gen = 1;
-            }else{
-                gen = 2;
-            }
-
-            MyDb user = new MyDb();
+            if(gender.equals("male")) gen = 1;
+            else gen = 2;
+            
+            RegisterDB user = new RegisterDB();
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setDob(dob);
@@ -43,30 +41,24 @@ public class NewServlet extends HttpServlet {
             user.setGender(gen);
             user.insertUserData();
             
-            int effect = user.isAffected();
-            out.println(effect);
-            
+            int effect = user.isAffected();            
             if (effect > 0) {
-                System.out.println("Data inserted successfully into user_table");
+                out.println("Data inserted successfully into user_table");
             } else {
-                System.out.println("Data insertion into user_table failed");
+                out.println("Data insertion into user_table failed");
             }
-            
-            
-            
-            
-            
-//            if ("true".equals(cancelRequest)) {
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/cancle");
-//                dispatcher.forward(request, response);
-//            } else {
-//                Student student = new Student("Azmi");
-//                student.setName("Azmi");
-//                String name = student.getName();
-//                request.setAttribute("name", name);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/res");
-//                dispatcher.forward(request, response);
-//            }
+                String myEmail = request.getParameter("myemail");
+                String myPassword = request.getParameter("mypassword");
+                String action = request.getParameter("login");
+            if (action != null && action.equals("login")) {
+                LoginDB login = new LoginDB();
+                login.setMyEmail(myEmail);
+                login.setPassword(myPassword);
+                login.login();
+                boolean isAuthenticated = login.isAuthenticated();
+                if (isAuthenticated) out.println("Login successful for user: ");
+                else out.println("Login failed");
+            }
         }
     }
 
@@ -77,6 +69,8 @@ public class NewServlet extends HttpServlet {
             processRequest(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -86,6 +80,8 @@ public class NewServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
+            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -13,23 +13,23 @@
         <jsp-file>WEB-INF/view/modelRes.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>cancle</servlet-name>
-        <jsp-file>WEB-INF/view/cancle.jsp</jsp-file>
+        <servlet-name>login</servlet-name>
+        <jsp-file>WEB-INF/view/login.jsp</jsp-file>
     </servlet>
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
-        <url-pattern>/NewServlet/*</url-pattern>
+        <url-pattern>/NewServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>cancle</servlet-name>
-        <url-pattern>/cancle</url-pattern>
+        <servlet-name>login</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>modelRes</servlet-name>
