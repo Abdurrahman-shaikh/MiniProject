@@ -5,7 +5,9 @@
         <group>
             <file>file:/home/azmi/NetBeansProjects/MiniProject/src/java/model/RegisterDB.java</file>
             <file>file:/home/azmi/NetBeansProjects/MiniProject/web/WEB-INF/view/login.jsp</file>
+            <file>file:/home/azmi/NetBeansProjects/MiniProject/src/java/model/GraphNode.java</file>
             <file>file:/home/azmi/NetBeansProjects/MiniProject/src/java/controller/NewServlet.java</file>
+            <file>file:/home/azmi/NetBeansProjects/MiniProject/src/java/model/ShortestPathFinder.java</file>
             <file>file:/home/azmi/NetBeansProjects/MiniProject/src/java/model/LoginDB.java</file>
         </group>
     </open-files>
